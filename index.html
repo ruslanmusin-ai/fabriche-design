@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fabriche Design</title>
+    <meta
+      name="description"
+      content="Итальянские декоры и фасады Fabriche Design. Коллекции, преимущества, история бренда и каталог."
+    />
+    <link
+      href="https://fonts.cdnfonts.com/css/wix-madefor-display"
+      rel="stylesheet"
+    />
+  <link rel="stylesheet" href="styles/main.css?v=20260617-2301" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <main>
+        <section class="hero-section" id="top">
+          <div class="hero-backdrop image-card image-card-hero">
+            <img
+              src="assets/hero/hero-banner.jpg"
+              alt="Главный баннер Fabriche Design"
+              data-fallback-label="Добавьте фоновый баннер hero-banner.jpg"
+            />
+          </div>
+          <div class="hero-overlay"></div>
+          <header class="site-header site-header-hero">
+            <div class="brand-mark brand-mark-hero">
+              <a class="brand-logo-link" href="#top" aria-label="Fabriche Design">
+                <img
+                  class="brand-logo-image"
+                  src="assets/common/logo.png"
+                  alt="Fabriche Design"
+                />
+              </a>
+            </div>
+            <nav class="site-nav" aria-label="Основная навигация">
+              <a href="#collection">Коллекции</a>
+              <a href="#about">О нас</a>
+              <a href="#catalog">Каталог</a>
+            </nav>
+            <div class="header-actions header-actions-hero">
+              <div class="social-links social-links-hero" id="header-socials"></div>
+              <button class="button button-ghost-light" type="button" data-open-modal="price">
+                Получить прайс
+              </button>
+            </div>
+          </header>
+          <div class="hero-copy hero-copy-overlay">
+            <h1>Fabriche Design.</h1>
+            <p class="hero-text hero-text-light">Безупречность без компромиссов.</p>
+            <div class="hero-actions">
+              <button class="button button-ghost-light" type="button" data-open-modal="price">
+                Начать проект
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="mission-section panel" id="mission">
+          <div class="section-heading">
+            <h2>Миссия бренда</h2>
+          </div>
+          <div class="mission-layout">
+            <div class="mission-copy-wrap">
+              <div class="mission-copy" id="mission-copy"></div>
+              <div class="mission-benefits" id="mission-benefits"></div>
+            </div>
+            <div class="mission-media">
+              <div class="image-card mission-banner-card">
+                <img
+                  id="mission-banner"
+                  src="assets/mission/mission-banner.jpg"
+                  alt="Миссия бренда Fabriche"
+                  data-fallback-label="Добавьте mission-banner.jpg в assets/mission"
+                />
+              </div>
+              <p class="mission-signoff" id="mission-signoff"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="collection-section panel" id="collection">
+          <div class="section-heading">
+            <h2>КОЛЛЕКЦИЯ</h2>
+          </div>
+
+          <div class="collection-layout">
+            <div class="collection-showcase">
+              <div class="image-card collection-banner-card">
+                <img
+                  id="collection-banner"
+                  src="assets/collection/collection-banner.jpg"
+                  alt="Баннер коллекции Fabriche"
+                  data-fallback-label="Добавьте баннер collection-banner.jpg"
+                />
+              </div>
+
+              <div class="collection-carousel-shell">
+                <div class="collection-carousel-header">
+                  <div class="collection-carousel-nav" aria-label="Навигация по коллекциям">
+                    <button type="button" class="collection-carousel-arrow collection-carousel-arrow-prev" id="collection-carousel-prev" aria-label="Предыдущие карточки"><span>‹</span></button>
+                    <button type="button" class="collection-carousel-arrow collection-carousel-arrow-next" id="collection-carousel-next" aria-label="Следующие карточки"><span>›</span></button>
+                  </div>
+                </div>
+                <div class="collection-carousel-viewport">
+                  <div class="collection-carousel" id="collection-carousel" aria-label="Коллекции Fabriche"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="about-section panel" id="about">
+          <div class="section-heading">
+            <h2>Наш дизайнер</h2>
+          </div>
+          <div class="about-flow">
+            <div class="about-copy about-copy--lead" id="about-intro"></div>
+            <div class="image-card portrait-card">
+              <img
+                src="assets/designer/designer-photo.jpg"
+                alt="Фото дизайнера Fabriche"
+                data-fallback-label="Добавьте designer-photo.jpg"
+              />
+            </div>
+            <div class="about-copy about-copy--middle" id="about-middle"></div>
+            <div class="image-card portrait-card">
+              <img
+                src="assets/designer/designer-photo-2.jpg"
+                alt="Второе фото дизайнера Fabriche"
+                data-fallback-label="Добавьте designer-photo-2.jpg"
+              />
+            </div>
+            <div class="about-copy about-copy--outro" id="about-outro"></div>
+          </div>
+        </section>
+
+        <section class="catalog-section panel" id="catalog">
+          <div class="section-heading">
+            <h2>КАТАЛОГ</h2>
+          </div>
+          <div class="catalog-layout">
+            <div class="catalog-copy">
+              <p>
+                Редкие итальянские декоры и уникальный стиль.
+                <br />
+                Скачайте каталог, чтобы выбрать характер вашего фасада.
+              </p>
+              <button class="button button-primary" type="button" data-open-modal="catalog">
+                Получить каталог
+              </button>
+            </div>
+            <div class="image-card catalog-card">
+              <img
+                src="assets/catalog/catalog-cover.jpg"
+                alt="Каталог Fabriche Design"
+                data-fallback-label="Добавьте изображение catalog-cover.jpg"
+              />
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <section class="legal-section" id="legal-card">
+        <div class="legal-hero image-card">
+          <img
+            src="assets/legal/legal-banner.jpg"
+            alt="Карточка организации Fabriche"
+            data-fallback-label="Добавьте legal-banner.jpg в assets/legal"
+          />
+          <div class="legal-overlay">
+            <div class="footer-links footer-links-embedded">
+              <div class="footer-group footer-group-nav">
+                <span class="footer-title">Меню</span>
+                <a href="#mission">Миссия бренда</a>
+                <a href="#collection">Коллекция</a>
+                <a href="#about">Наш дизайнер</a>
+                <a href="#catalog">Каталог</a>
+                <span class="footer-title footer-title-secondary">Клиентам</span>
+                <a href="#" id="privacy-link">Политика конфиденциальности</a>
+                <a href="#" id="offer-link">Договор оферта</a>
+              </div>
+              <div class="footer-group footer-group-contacts">
+                <span class="footer-title">Контакты</span>
+                <span class="footer-contact-line" id="footer-address"></span>
+                <a id="footer-phone" href="tel:+74733003856"></a>
+                <a id="footer-email" href="mailto:info@fabriche.ru"></a>
+                <div class="social-links" id="footer-socials"></div>
+              </div>
+            </div>
+            <div class="legal-details" id="legal-details"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="modal side-drawer callback-form" id="request-modal" hidden>
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="modal-dialog side-drawer__container" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="side-drawer__main">
+          <div class="modal-topline side-drawer__head">
+            <span class="section-kicker" id="modal-kicker">Запрос</span>
+            <button class="modal-close side-drawer__close" type="button" aria-label="Закрыть" data-close-modal>
+              ×
+            </button>
+          </div>
+          <h2 id="modal-title">Получить материал</h2>
+          <p id="modal-description"></p>
+          <div class="collection-modal" id="collection-modal-content" hidden>
+            <section class="collection-modal-section">
+              <div class="collection-modal-copy" id="collection-modal-copy"></div>
+            </section>
+
+            <section class="collection-modal-section">
+              <div class="collection-modal-section-head">
+                <h3 class="collection-modal-heading">Примеры фасадов</h3>
+              </div>
+              <div class="collection-modal-gallery-layout">
+                <div class="collection-modal-gallery-stage">
+                  <button type="button" class="gallery-nav gallery-nav-side gallery-nav-side-prev" id="collection-gallery-prev" aria-label="Назад">‹</button>
+                  <div class="collection-modal-gallery-main collection-modal-gallery-main-facades image-card" id="collection-modal-gallery-main"></div>
+                  <button type="button" class="gallery-nav gallery-nav-side gallery-nav-side-next" id="collection-gallery-next" aria-label="Вперед">›</button>
+                </div>
+                <div class="collection-modal-gallery" id="collection-modal-gallery" aria-live="polite"></div>
+              </div>
+            </section>
+
+            <section class="collection-modal-section">
+              <div class="collection-modal-section-head">
+                <h3 class="collection-modal-heading">Варианты фрезеровок</h3>
+              </div>
+              <div class="collection-modal-gallery-layout">
+                <div class="collection-modal-gallery-stage">
+                  <button type="button" class="gallery-nav gallery-nav-side gallery-nav-side-prev" id="collection-gallery-prev-secondary" aria-label="Назад">‹</button>
+                  <div class="collection-modal-gallery-main collection-modal-gallery-main-facades image-card" id="collection-modal-gallery-main-secondary"></div>
+                  <button type="button" class="gallery-nav gallery-nav-side gallery-nav-side-next" id="collection-gallery-next-secondary" aria-label="Вперед">›</button>
+                </div>
+                <div class="collection-modal-gallery" id="collection-modal-gallery-secondary" aria-live="polite"></div>
+              </div>
+            </section>
+
+          </div>
+          <form class="request-form form-popup" id="request-form">
+          <input type="hidden" name="requestType" id="request-type" />
+          <input type="hidden" name="message" id="message-input" />
+          <label>
+            <span>Имя*</span>
+            <input type="text" name="name" id="name-input" class="form-popup__input" placeholder="Имя*" required />
+          </label>
+          <label>
+            <span>E-mail*</span>
+            <input type="email" name="email" id="email-input" class="form-popup__input" placeholder="E-mail*" required />
+          </label>
+          <label>
+            <span>Телефон*</span>
+            <input type="tel" name="phone" id="phone-input" class="form-popup__input" placeholder="+7 (___) ___-__-__" required />
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" name="consent" id="consent-input" required />
+            <span class="checkbox-box" aria-hidden="true"></span>
+            <span class="checkbox-text">
+              Соглашаюсь на
+              <a href="#" id="consent-policy-link">обработку персональных данных</a>
+              и условия
+              <a href="#" id="consent-offer-link">публичной оферты</a>
+            </span>
+          </label>
+          <button class="button button-primary button-block" type="submit" id="submit-button">
+            Отправить
+          </button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  <script src="scripts/data.js?v=20260620-0315"></script>
+  <script src="scripts/main.js?v=20260620-0315"></script>
+  </body>
+</html>
