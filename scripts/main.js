@@ -20,7 +20,11 @@
   const formStatus = document.getElementById("form-status");
   const submitButton = document.getElementById("submit-button");
   const collectionModalContent = document.getElementById("collection-modal-content");
+  const privacyModal = document.getElementById("privacy-modal");
+  const privacyModalFrame = document.getElementById("privacy-modal-frame");
+  const privacyModalTitle = document.getElementById("privacy-modal-title");
   let modalCloseTimer = null;
+  let privacyModalCloseTimer = null;
   let collectionModalGalleryIndex = 0;
   let collectionModalMillingsIndex = 0;
 
@@ -85,6 +89,7 @@
     }
 
     renderSocialLinks("header-socials");
+    renderSocialLinks("mobile-menu-socials");
     renderSocialLinks("footer-socials");
   }
 
@@ -101,7 +106,7 @@
       }
       link.setAttribute("aria-label", social.label);
       link.className = "contact-icon";
-      link.innerHTML = `<img src="${social.icon}" alt="${social.label}" />`;
+      link.innerHTML = `<img src="${social.icon}" alt="${social.label}" loading="lazy" decoding="async" />`;
       container.appendChild(link);
     });
   }
@@ -162,7 +167,7 @@
       const card = document.createElement("div");
       card.className = "image-card gallery-card";
       card.innerHTML = `
-        <img src="${kitchen.image}" alt="${kitchen.title}" data-fallback-label="Добавьте ${kitchen.image.split("/").pop()}" />
+        <img src="${kitchen.image}" alt="${kitchen.title}" loading="lazy" decoding="async" data-fallback-label="Добавьте ${kitchen.image.split("/").pop()}" />
       `;
       gallery.appendChild(card);
     });
@@ -282,6 +287,8 @@
         <img
           src="${card.image}"
           alt="${card.title} — ${card.place}"
+          loading="lazy"
+          decoding="async"
           data-fallback-label="Добавьте ${card.image.split("/").pop()}"
         />
       `;
@@ -319,6 +326,7 @@
     };
     const millingGallery = {
       main: document.getElementById("collection-modal-gallery-main-secondary"),
+      caption: document.getElementById("collection-modal-milling-caption"),
       rail: document.getElementById("collection-modal-gallery-secondary"),
       prev: document.getElementById("collection-gallery-prev-secondary"),
       next: document.getElementById("collection-gallery-next-secondary"),
@@ -326,7 +334,7 @@
     if (
       !copy ||
       !kitchenGallery.main || !kitchenGallery.rail || !kitchenGallery.prev || !kitchenGallery.next ||
-      !millingGallery.main || !millingGallery.rail || !millingGallery.prev || !millingGallery.next
+      !millingGallery.main || !millingGallery.caption || !millingGallery.rail || !millingGallery.prev || !millingGallery.next
     ) return;
 
     const toneLine = card.code
@@ -361,23 +369,14 @@
           <img
             src="${current.image}"
             alt="${current.title}"
+            decoding="async"
             data-fallback-label="Добавьте ${current.image.split("/").pop()}"
           />
         </div>
       `;
     };
 
-    const scrollThumbnailIntoCarousel = (container, element) => {
-      if (!element) return;
-      const targetLeft = element.offsetLeft - (container.clientWidth - element.clientWidth) / 2;
-      container.scrollTo({
-        left: Math.max(0, targetLeft),
-        behavior: "smooth",
-      });
-    };
-
-    const renderGalleryBlock = ({ items, index, main, rail, prev, next, emptyText, onSelect }) => {
-      renderPrimaryImage(main, items?.[index], emptyText);
+    const buildGalleryRail = ({ items, rail, onSelect, emptyText, showTitles = false }) => {
       rail.innerHTML = "";
 
       if (items?.length) {
@@ -390,16 +389,15 @@
             <img
               src="${item.image}"
               alt="${item.title}"
+              loading="lazy"
+              decoding="async"
               data-fallback-label="Добавьте ${item.image.split("/").pop()}"
             />
+            ${showTitles ? `<span class="collection-modal-gallery-card-title">${item.title}</span>` : ""}
           `;
           frame.addEventListener("click", () => onSelect(itemIndex));
-          frame.classList.toggle("is-active", itemIndex === index);
           rail.appendChild(frame);
         });
-        prev.hidden = false;
-        next.hidden = false;
-        scrollThumbnailIntoCarousel(rail, rail.children[index]);
         return;
       }
 
@@ -407,12 +405,39 @@
       empty.className = "collection-modal-empty";
       empty.textContent = emptyText;
       rail.appendChild(empty);
+    };
+
+    const scrollThumbnailIntoCarousel = (container, element) => {
+      if (!element) return;
+      const targetLeft = element.offsetLeft - (container.clientWidth - element.clientWidth) / 2;
+      container.scrollTo({
+        left: Math.max(0, targetLeft),
+        behavior: "smooth",
+      });
+    };
+
+    const updateGalleryBlock = ({ items, index, main, rail, prev, next, emptyText, caption = null }) => {
+      renderPrimaryImage(main, items?.[index], emptyText);
+      if (caption) {
+        caption.textContent = items?.[index]?.title || "";
+      }
+
+      if (items?.length) {
+        Array.from(rail.children).forEach((frame, itemIndex) => {
+          frame.classList.toggle("is-active", itemIndex === index);
+        });
+        prev.hidden = false;
+        next.hidden = false;
+        scrollThumbnailIntoCarousel(rail, rail.children[index]);
+        return;
+      }
       prev.hidden = true;
       next.hidden = true;
     };
 
-    const renderAllGalleries = () => {
-      renderGalleryBlock({
+    const handleKitchenSelect = (nextIndex) => {
+      collectionModalGalleryIndex = nextIndex;
+      updateGalleryBlock({
         items: card.kitchens,
         index: collectionModalGalleryIndex,
         main: kitchenGallery.main,
@@ -420,24 +445,60 @@
         prev: kitchenGallery.prev,
         next: kitchenGallery.next,
         emptyText: "Фото фасадов будут добавлены в ассеты.",
-        onSelect: (nextIndex) => {
-          collectionModalGalleryIndex = nextIndex;
-          renderAllGalleries();
-        },
       });
+      setupPlaceholders();
+    };
 
-      renderGalleryBlock({
+    const handleMillingSelect = (nextIndex) => {
+      collectionModalMillingsIndex = nextIndex;
+      updateGalleryBlock({
         items: card.millings,
         index: collectionModalMillingsIndex,
         main: millingGallery.main,
+        caption: millingGallery.caption,
         rail: millingGallery.rail,
         prev: millingGallery.prev,
         next: millingGallery.next,
         emptyText: "Фрезеровки будут добавлены в ассеты.",
-        onSelect: (nextIndex) => {
-          collectionModalMillingsIndex = nextIndex;
-          renderAllGalleries();
-        },
+      });
+      setupPlaceholders();
+    };
+
+    buildGalleryRail({
+      items: card.kitchens,
+      rail: kitchenGallery.rail,
+      emptyText: "Фото фасадов будут добавлены в ассеты.",
+      onSelect: handleKitchenSelect,
+    });
+
+    buildGalleryRail({
+      items: card.millings,
+      rail: millingGallery.rail,
+      showTitles: true,
+      emptyText: "Фрезеровки будут добавлены в ассеты.",
+      onSelect: handleMillingSelect,
+    });
+
+    const renderAllGalleries = () => {
+      updateGalleryBlock({
+        items: card.kitchens,
+        index: collectionModalGalleryIndex,
+        main: kitchenGallery.main,
+        rail: kitchenGallery.rail,
+        prev: kitchenGallery.prev,
+        next: kitchenGallery.next,
+        emptyText: "Фото фасадов будут добавлены в ассеты.",
+      });
+
+      updateGalleryBlock({
+        items: card.millings,
+        index: collectionModalMillingsIndex,
+        main: millingGallery.main,
+        caption: millingGallery.caption,
+        rail: millingGallery.rail,
+        prev: millingGallery.prev,
+        next: millingGallery.next,
+        emptyText: "Фрезеровки будут добавлены в ассеты.",
       });
     };
 
@@ -765,18 +826,116 @@
     }, 420);
   }
 
+  function openPrivacyModal(title, pdfUrl) {
+    if (!privacyModal || !privacyModalFrame || !pdfUrl || pdfUrl === "#") return;
+
+    clearTimeout(privacyModalCloseTimer);
+    privacyModal.hidden = false;
+    privacyModal.classList.add("is-document");
+    privacyModal.classList.remove("is-closing");
+    if (privacyModalTitle) {
+      privacyModalTitle.textContent = title || "Документ";
+    }
+    privacyModalFrame.src = pdfUrl;
+    document.body.style.overflow = "hidden";
+
+    requestAnimationFrame(() => {
+      privacyModal.classList.add("is-active");
+    });
+  }
+
+  function closePrivacyModal() {
+    if (!privacyModal) return;
+
+    privacyModal.classList.remove("is-active");
+    privacyModal.classList.add("is-closing");
+    document.body.style.overflow = !modal.hidden ? "hidden" : "";
+    clearTimeout(privacyModalCloseTimer);
+    privacyModalCloseTimer = setTimeout(() => {
+      privacyModal.hidden = true;
+      privacyModal.classList.remove("is-document");
+      privacyModal.classList.remove("is-closing");
+      if (privacyModalFrame) {
+        privacyModalFrame.src = "";
+      }
+    }, 420);
+  }
+
   function setupModal() {
     document.querySelectorAll("[data-open-modal]").forEach((button) => {
       button.addEventListener("click", () => openModal(button.dataset.openModal));
+    });
+
+    const privacyLink = document.getElementById("privacy-link");
+    const offerLink = document.getElementById("offer-link");
+    const consentPolicyLink = document.getElementById("consent-policy-link");
+
+    [
+      [privacyLink, "Политика конфиденциальности", siteConfig.legal?.privacy],
+      [offerLink, "Отзыв согласия на обработку персональных данных", siteConfig.legal?.offer],
+      [consentPolicyLink, "Политика конфиденциальности", siteConfig.legal?.privacy],
+    ].forEach(([link, title, href]) => {
+      if (!link || !href || href === "#") return;
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        openPrivacyModal(title, href);
+      });
     });
 
     document.querySelectorAll("[data-close-modal]").forEach((element) => {
       element.addEventListener("click", closeModal);
     });
 
+    document.querySelectorAll("[data-close-privacy-modal]").forEach((element) => {
+      element.addEventListener("click", closePrivacyModal);
+    });
+
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && !modal.hidden) {
         closeModal();
+      }
+      if (event.key === "Escape" && privacyModal && !privacyModal.hidden) {
+        closePrivacyModal();
+      }
+    });
+  }
+
+  function setupMobileMenu() {
+    const toggle = document.querySelector(".burger-toggle");
+    const menu = document.getElementById("mobile-menu");
+    const closeButton = document.querySelector(".mobile-menu__close");
+
+    if (!toggle || !menu || !closeButton) return;
+
+    const setOpen = (isOpen) => {
+      toggle.classList.toggle("is-active", isOpen);
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      menu.hidden = !isOpen;
+      menu.classList.toggle("is-active", isOpen);
+      document.body.classList.toggle("mobile-menu-open", isOpen);
+      document.body.style.overflow = isOpen || !modal.hidden ? "hidden" : "";
+    };
+
+    toggle.addEventListener("click", () => {
+      const nextState = toggle.getAttribute("aria-expanded") !== "true";
+      setOpen(nextState);
+    });
+
+    closeButton.addEventListener("click", () => setOpen(false));
+
+    menu.addEventListener("click", (event) => {
+      if (event.target === menu) {
+        setOpen(false);
+      }
+    });
+
+    menu.querySelectorAll("a, [data-open-modal]").forEach((element) => {
+      element.addEventListener("click", () => setOpen(false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+        setOpen(false);
       }
     });
   }
@@ -877,6 +1036,7 @@
   populateOrganization();
   populateLegalCard();
   setupModal();
+  setupMobileMenu();
   setupForm();
   setupPlaceholders();
   setupLuxuryMotion();

@@ -24,8 +24,8 @@ window.siteConfig = {
     { label: "Phone", icon: "assets/common/icons/icon-call.png", href: "tel:+74733003856" },
   ],
   legal: {
-    privacy: "#",
-    offer: "#",
+    privacy: "assets/legal/privacy-policy.pdf",
+    offer: "assets/legal/consent-withdrawal-combined.pdf",
   },
   about: {
     intro:
@@ -33,7 +33,7 @@ window.siteConfig = {
     middle:
       "Сегодня его профессиональная репутация такова, что крупнейшие европейские производители кухонь обращаются к его мнению при формировании годовых коллекций. Имя арт-директора здесь — знак качества, который исключает компромиссы.",
     outro:
-      "<strong>FABRICE DESIGN</strong> — ФАСАДЫ ДЛЯ КУХНИ, ПРОИЗВОДИМЫЕ В РОССИИ С ИСПОЛЬЗОВАНИЕМ ИТАЛЬЯНСКИХ МАТЕРИАЛОВ И НА ИТАЛЬЯНСКОМ ОБОРУДОВАНИИ.",
+      "<strong>FABRICE DESIGN</strong> — ФАСАДЫ, ПРОИЗВОДИМЫЕ В РОССИИ С ИСПОЛЬЗОВАНИЕМ ИТАЛЬЯНСКИХ МАТЕРИАЛОВ И НА ИТАЛЬЯНСКОМ ОБОРУДОВАНИИ.",
   },
   mission: {
     story: [
@@ -91,43 +91,42 @@ const buildCollectionKitchens = (slug, label, files) =>
     image: `assets/collection/kitchens/${slug}/${file}`,
   }));
 
-const buildSequentialCollectionKitchens = (slug, label, count, extension = "png", extensionMap = {}) =>
+const buildSequentialCollectionKitchens = (slug, label, count) =>
   buildCollectionKitchens(
     slug,
     label,
     Array.from({ length: count }, (_, index) => {
       const position = index + 1;
-      const ext = extensionMap[position] || extension;
-      return `${slug}-${String(position).padStart(2, "0")}.${ext}`;
+      return `${slug}-${String(position).padStart(2, "0")}.webp`;
     })
   );
 
-const sharedCollectionMillings = Array.from({ length: 7 }, (_, index) => ({
-  title: `Фрезеровка ${index + 1}`,
-  image: `assets/collection/millings/sardinia/milling-${index + 1}.jpg`,
+const sharedCollectionMillings = ["Milano", "Riva", "Forma", "Scala", "Vento", "Linea", "Modo"].map((title, index) => ({
+  title,
+  image: `assets/collection/millings/sardinia/milling-${index + 1}.webp`,
 }));
 
 window.collectionData = {
-  bannerImage: "assets/collection/collection-banner.jpg",
+  bannerImage: "assets/collection/collection-banner.webp",
   cards: [
     {
       id: "lucent-white",
       title: "Lucent White",
       place: "Сардиния",
-      image: "assets/collection/cards/lucent-white.jpg",
+      image: "assets/collection/cards/lucent-white.webp",
       code: "11-0700TPG",
       mood: "белоснежные пляжи, бирюзовое море, скалы.",
       associations: "чистота моря, песок, солнечный свет.",
       description:
         "Lucent White — сияющий белый. Напоминает о песке пляжей и бликах на воде.",
-      kitchens: buildSequentialCollectionKitchens("sardinia", "Sardinia", 20, "jpg"),
+      kitchens: buildSequentialCollectionKitchens("sardinia", "Sardinia", 20),
       millings: sharedCollectionMillings,
     },
     {
       id: "moonbeam",
       title: "Moonbeam",
       place: "Пьемонт",
-      image: "assets/collection/cards/moonbeam.jpg",
+      image: "assets/collection/cards/moonbeam.webp",
       code: "13-0000TPG",
       mood: "предгорье Альп, виноградники, озёра.",
       associations: "утренний туман над долинами, тишина гор, элегантность.",
@@ -140,7 +139,7 @@ window.collectionData = {
       id: "crystal-gray",
       title: "Crystal Gray",
       place: "Позитано",
-      image: "assets/collection/cards/crystal-gray.jpg",
+      image: "assets/collection/cards/crystal-gray.webp",
       code: "13-3801TPG",
       mood: "красочные домики на склоне, лазурное море, атмосфера праздника.",
       associations: "яркие фасады, шум волн, летний отдых.",
@@ -153,7 +152,7 @@ window.collectionData = {
       id: "castle-wall",
       title: "Castle Wall",
       place: "Амальфи",
-      image: "assets/collection/cards/castle-wall.jpg",
+      image: "assets/collection/cards/castle-wall.webp",
       code: "14-0108TPG",
       mood: "обрывы над морем, яркие домики, лимонные рощи.",
       associations: "старинная архитектура, средиземноморский шик, величие природы.",
@@ -166,24 +165,20 @@ window.collectionData = {
       id: "northern-droplet",
       title: "Northern Droplet",
       place: "Лацио",
-      image: "assets/collection/cards/northern-droplet.jpg",
+      image: "assets/collection/cards/northern-droplet.webp",
       code: "14-4104TPG",
       mood: "побережье Тирренского моря, пляжи рядом с Римом, виллы.",
       associations: "свежесть моря, римская роскошь, отдых у воды.",
       description:
         "Northern Droplet — мягкий, прозрачный оттенок. Напоминает о каплях утренней росы и бризе с моря.",
-      kitchens: buildSequentialCollectionKitchens("lazio", "Lazio", 18, "png", {
-        5: "bmp",
-        6: "bmp",
-        7: "bmp",
-      }),
+      kitchens: buildSequentialCollectionKitchens("lazio", "Lazio", 18),
       millings: sharedCollectionMillings,
     },
     {
       id: "ghost-gray",
       title: "Ghost Gray",
       place: "Умбрия",
-      image: "assets/collection/cards/ghost-gray.jpg",
+      image: "assets/collection/cards/ghost-gray.webp",
       code: "16-4703TPG",
       mood: "«зелёное сердце» Италии, средневековые города, оливковые рощи.",
       associations: "тенистые аллеи, старинные стены, умиротворение.",
@@ -196,24 +191,20 @@ window.collectionData = {
       id: "shadow",
       title: "Shadow",
       place: "Ломбардия",
-      image: "assets/collection/cards/shadow.jpg",
+      image: "assets/collection/cards/shadow.webp",
       code: "17-6206TPG",
       mood: "предгорье Альп, озёра Комо и Гарда, элегантная архитектура Милана.",
       associations: "величественные горы, туманные долины, старинные замки.",
       description:
         "Shadow — глубокий, приглушённый оттенок. Передаёт таинственность горных пейзажей и историческую глубину региона.",
-      kitchens: buildSequentialCollectionKitchens("lombardy", "Lombardy", 15, "png", {
-        1: "jpeg",
-        2: "jpeg",
-        3: "jpeg",
-      }),
+      kitchens: buildSequentialCollectionKitchens("lombardy", "Lombardy", 15),
       millings: sharedCollectionMillings,
     },
     {
       id: "new-wheat",
       title: "New Wheat",
       place: "Сорренто",
-      image: "assets/collection/cards/new-wheat.jpg",
+      image: "assets/collection/cards/new-wheat.webp",
       code: "14-1038TPG",
       mood: "лимонные сады на склонах, вид на Неаполитанский залив, средиземноморская атмосфера.",
       associations: "солнечный свет, аромат цитрусов, терракотовые крыши.",
@@ -226,7 +217,7 @@ window.collectionData = {
       id: "autumn-glaze",
       title: "Autumn Glaze",
       place: "Сицилия",
-      image: "assets/collection/cards/autumn-glaze.jpg",
+      image: "assets/collection/cards/autumn-glaze.webp",
       code: "18-1451TPG",
       mood: "вулкан Этна, древние руины, пляжи с чёрным песком.",
       associations: "жаркий полдень, древние мифы, богатство природы.",
@@ -239,15 +230,13 @@ window.collectionData = {
       id: "china-blue",
       title: "China Blue",
       place: "Венето",
-      image: "assets/collection/cards/china-blue.jpg",
+      image: "assets/collection/cards/china-blue.webp",
       code: "18-3918TPG",
       mood: "каналы Венеции, лагуны, пляжи Лидо.",
       associations: "голубая вода каналов, парусники, романтика гондол.",
       description:
         "China Blue — глубокий синий. Напоминает о водах Адриатики и вечернем небе над Венецией.",
-      kitchens: buildSequentialCollectionKitchens("veneto", "Veneto", 25, "png", {
-        25: "jpg",
-      }),
+      kitchens: buildSequentialCollectionKitchens("veneto", "Veneto", 25),
       millings: sharedCollectionMillings,
     },
   ],

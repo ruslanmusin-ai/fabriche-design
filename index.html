@@ -12,7 +12,7 @@
       href="https://fonts.cdnfonts.com/css/wix-madefor-display"
       rel="stylesheet"
     />
-  <link rel="stylesheet" href="styles/main.css?v=20260617-2301" />
+  <link rel="stylesheet" href="styles/main.css?v=20260706-1549" />
   </head>
   <body>
     <div class="page-shell">
@@ -20,8 +20,10 @@
         <section class="hero-section" id="top">
           <div class="hero-backdrop image-card image-card-hero">
             <img
-              src="assets/hero/hero-banner.jpg"
+              src="assets/hero/hero-banner.webp"
               alt="Главный баннер Fabriche Design"
+              decoding="async"
+              fetchpriority="high"
               data-fallback-label="Добавьте фоновый баннер hero-banner.jpg"
             />
           </div>
@@ -33,12 +35,25 @@
                   class="brand-logo-image"
                   src="assets/common/logo.png"
                   alt="Fabriche Design"
+                  decoding="async"
                 />
               </a>
             </div>
+            <button
+              class="burger-toggle"
+              type="button"
+              aria-label="Открыть меню"
+              aria-expanded="false"
+              aria-controls="mobile-menu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
             <nav class="site-nav" aria-label="Основная навигация">
-              <a href="#collection">Коллекции</a>
-              <a href="#about">О нас</a>
+              <a href="#mission">Миссия бренда</a>
+              <a href="#collection">Коллекция</a>
+              <a href="#about">Наш дизайнер</a>
               <a href="#catalog">Каталог</a>
             </nav>
             <div class="header-actions header-actions-hero">
@@ -46,6 +61,28 @@
               <button class="button button-ghost-light" type="button" data-open-modal="price">
                 Получить прайс
               </button>
+            </div>
+            <div class="mobile-menu" id="mobile-menu" hidden>
+              <div class="mobile-menu__panel">
+                <div class="mobile-menu__topline">
+                  <span class="mobile-menu__label">Меню</span>
+                  <button class="mobile-menu__close" type="button" aria-label="Закрыть меню">
+                    ×
+                  </button>
+                </div>
+                <nav class="mobile-menu__nav" aria-label="Мобильная навигация">
+                  <a href="#mission">Миссия бренда</a>
+                  <a href="#collection">Коллекция</a>
+                  <a href="#about">Наш дизайнер</a>
+                  <a href="#catalog">Каталог</a>
+                </nav>
+                <div class="mobile-menu__contacts">
+                  <div class="social-links social-links-hero mobile-menu__socials" id="mobile-menu-socials"></div>
+                </div>
+                <button class="button button-ghost-light button-block mobile-menu__button" type="button" data-open-modal="price">
+                  Получить прайс
+                </button>
+              </div>
             </div>
           </header>
           <div class="hero-copy hero-copy-overlay">
@@ -72,8 +109,10 @@
               <div class="image-card mission-banner-card">
                 <img
                   id="mission-banner"
-                  src="assets/mission/mission-banner.jpg"
+                  src="assets/mission/mission-banner.webp"
                   alt="Миссия бренда Fabriche"
+                  loading="lazy"
+                  decoding="async"
                   data-fallback-label="Добавьте mission-banner.jpg в assets/mission"
                 />
               </div>
@@ -92,8 +131,10 @@
               <div class="image-card collection-banner-card">
                 <img
                   id="collection-banner"
-                  src="assets/collection/collection-banner.jpg"
+                  src="assets/collection/collection-banner.webp"
                   alt="Баннер коллекции Fabriche"
+                  loading="lazy"
+                  decoding="async"
                   data-fallback-label="Добавьте баннер collection-banner.jpg"
                 />
               </div>
@@ -121,16 +162,20 @@
             <div class="about-copy about-copy--lead" id="about-intro"></div>
             <div class="image-card portrait-card">
               <img
-                src="assets/designer/designer-photo.jpg"
+                src="assets/designer/designer-photo.webp"
                 alt="Фото дизайнера Fabriche"
+                loading="lazy"
+                decoding="async"
                 data-fallback-label="Добавьте designer-photo.jpg"
               />
             </div>
             <div class="about-copy about-copy--middle" id="about-middle"></div>
             <div class="image-card portrait-card">
               <img
-                src="assets/designer/designer-photo-2.jpg"
+                src="assets/designer/designer-photo-2.webp"
                 alt="Второе фото дизайнера Fabriche"
+                loading="lazy"
+                decoding="async"
                 data-fallback-label="Добавьте designer-photo-2.jpg"
               />
             </div>
@@ -149,14 +194,21 @@
                 <br />
                 Скачайте каталог, чтобы выбрать характер вашего фасада.
               </p>
-              <button class="button button-primary" type="button" data-open-modal="catalog">
+              <a
+                class="button button-primary"
+                href="https://disk.yandex.ru/i/VZmlDBvAD55t7A"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Получить каталог
-              </button>
+              </a>
             </div>
             <div class="image-card catalog-card">
               <img
-                src="assets/catalog/catalog-cover.jpg"
+                src="assets/catalog/catalog-cover.webp"
                 alt="Каталог Fabriche Design"
+                loading="lazy"
+                decoding="async"
                 data-fallback-label="Добавьте изображение catalog-cover.jpg"
               />
             </div>
@@ -167,8 +219,10 @@
       <section class="legal-section" id="legal-card">
         <div class="legal-hero image-card">
           <img
-            src="assets/legal/legal-banner.jpg"
+            src="assets/legal/legal-banner.webp"
             alt="Карточка организации Fabriche"
+            loading="lazy"
+            decoding="async"
             data-fallback-label="Добавьте legal-banner.jpg в assets/legal"
           />
           <div class="legal-overlay">
@@ -181,7 +235,7 @@
                 <a href="#catalog">Каталог</a>
                 <span class="footer-title footer-title-secondary">Клиентам</span>
                 <a href="#" id="privacy-link">Политика конфиденциальности</a>
-                <a href="#" id="offer-link">Договор оферта</a>
+                <a href="#" id="offer-link">Отзыв согласия на обработку персональных данных</a>
               </div>
               <div class="footer-group footer-group-contacts">
                 <span class="footer-title">Контакты</span>
@@ -238,6 +292,7 @@
                   <div class="collection-modal-gallery-main collection-modal-gallery-main-facades image-card" id="collection-modal-gallery-main-secondary"></div>
                   <button type="button" class="gallery-nav gallery-nav-side gallery-nav-side-next" id="collection-gallery-next-secondary" aria-label="Вперед">›</button>
                 </div>
+                <p class="collection-modal-gallery-caption" id="collection-modal-milling-caption"></p>
                 <div class="collection-modal-gallery" id="collection-modal-gallery-secondary" aria-live="polite"></div>
               </div>
             </section>
@@ -277,7 +332,27 @@
       </div>
     </div>
 
-  <script src="scripts/data.js?v=20260620-0315"></script>
-  <script src="scripts/main.js?v=20260620-0315"></script>
+    <div class="modal" id="privacy-modal" hidden>
+      <div class="modal-backdrop" data-close-privacy-modal></div>
+      <div class="modal-dialog privacy-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="privacy-modal-title">
+        <div class="modal-topline privacy-modal-topline">
+          <h2 id="privacy-modal-title">Документ</h2>
+          <button class="modal-close" type="button" aria-label="Закрыть документ" data-close-privacy-modal>
+            ×
+          </button>
+        </div>
+        <div class="privacy-modal-frame-wrap">
+          <iframe
+            class="privacy-modal-frame"
+            id="privacy-modal-frame"
+            title="Политика конфиденциальности"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+  <script src="scripts/data.js?v=20260706-1613"></script>
+  <script src="scripts/main.js?v=20260706-1613"></script>
   </body>
 </html>
