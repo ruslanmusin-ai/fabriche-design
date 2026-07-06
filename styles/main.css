@@ -712,6 +712,7 @@ body.mobile-menu-open .site-header-hero .brand-mark-hero {
   display: grid;
   gap: 26px;
   padding: 0 clamp(18px, 5vw, 72px);
+  min-width: 0;
 }
 
 .mission-media {
@@ -793,18 +794,22 @@ body.mobile-menu-open .site-header-hero .brand-mark-hero {
   display: grid;
   gap: 18px;
   max-width: 1080px;
+  min-width: 0;
 }
 
 .mission-copy-wrap {
   display: grid;
   gap: 24px;
   align-content: start;
+  min-width: 0;
 }
 
 .mission-copy p {
   font-size: 1.05rem;
   line-height: 1.7;
   color: var(--muted);
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .mission-copy p:first-child {
@@ -869,16 +874,47 @@ body.mobile-menu-open .site-header-hero .brand-mark-hero {
 }
 
 @media (max-width: 700px) {
+  .mission-section .section-heading,
+  .mission-copy-wrap {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .mission-section .section-heading h2 {
+    max-width: 100%;
+    font-size: clamp(1.9rem, 10vw, 2.6rem);
+    line-height: 0.96;
+    overflow-wrap: anywhere;
+  }
+
+  .mission-copy {
+    gap: 14px;
+  }
+
+  .mission-copy p {
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .mission-copy p:first-child {
+    font-size: 0.98rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+
   .mission-benefits {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(172px, 78vw);
+    grid-auto-columns: minmax(168px, 72vw);
     grid-template-columns: none;
-    gap: 16px;
+    gap: 12px;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 0 4px 10px;
-    scroll-snap-type: x proximity;
+    padding: 4px 18px 12px;
+    margin: 0 calc(50% - 50vw);
+    scroll-padding-left: 18px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
 
@@ -894,6 +930,10 @@ body.mobile-menu-open .site-header-hero .brand-mark-hero {
     width: 100%;
     min-width: 0;
     scroll-snap-align: start;
+  }
+
+  .mission-benefits .advantage-process-card h3 span {
+    white-space: normal;
   }
 }
 
@@ -1463,6 +1503,15 @@ body.mobile-menu-open .site-header-hero .brand-mark-hero {
 
 .gallery-nav-side:hover {
   transform: translateY(-50%) scale(1.04);
+}
+
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  .collection-modal .gallery-nav-side {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
 }
 
 .kitchen-gallery {

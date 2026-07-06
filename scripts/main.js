@@ -416,6 +416,32 @@
       });
     };
 
+    const setupSwipeNavigation = (element, onPrev, onNext) => {
+      if (!element) return;
+
+      let touchStartX = 0;
+      let touchDeltaX = 0;
+
+      element.addEventListener("touchstart", (event) => {
+        touchStartX = event.changedTouches[0]?.clientX || 0;
+        touchDeltaX = 0;
+      }, { passive: true });
+
+      element.addEventListener("touchmove", (event) => {
+        const currentX = event.changedTouches[0]?.clientX || 0;
+        touchDeltaX = currentX - touchStartX;
+      }, { passive: true });
+
+      element.addEventListener("touchend", () => {
+        if (Math.abs(touchDeltaX) < 36) return;
+        if (touchDeltaX > 0) {
+          onPrev();
+        } else {
+          onNext();
+        }
+      }, { passive: true });
+    };
+
     const updateGalleryBlock = ({ items, index, main, rail, prev, next, emptyText, caption = null }) => {
       renderPrimaryImage(main, items?.[index], emptyText);
       if (caption) {
@@ -531,6 +557,9 @@
       renderAllGalleries();
       millingGallery.next.blur();
     };
+
+    setupSwipeNavigation(kitchenGallery.main, kitchenGallery.prev.onclick, kitchenGallery.next.onclick);
+    setupSwipeNavigation(millingGallery.main, millingGallery.prev.onclick, millingGallery.next.onclick);
 
     setupPlaceholders();
   }
