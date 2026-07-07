@@ -649,6 +649,25 @@ body.mobile-menu-open .site-header-hero .brand-mark-hero {
   gap: 14px;
 }
 
+.mobile-menu__contact-lines {
+  display: grid;
+  gap: 8px;
+}
+
+.mobile-menu__address {
+  display: grid;
+  gap: 0;
+  color: #fff9f3;
+  line-height: 1.2;
+  font-size: 0.88rem;
+}
+
+.mobile-menu__contact-link {
+  color: #fff9f3;
+  line-height: 1.2;
+  font-size: 0.88rem;
+}
+
 .mobile-menu__socials {
   gap: 16px;
 }
@@ -905,12 +924,12 @@ body.mobile-menu-open .site-header-hero .brand-mark-hero {
   .mission-benefits {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(168px, 72vw);
+    grid-auto-columns: minmax(128px, 42vw);
     grid-template-columns: none;
-    gap: 12px;
+    gap: 4px;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 4px 18px 12px;
+    padding: 0 0 10px;
     margin: 0 calc(50% - 50vw);
     scroll-padding-left: 18px;
     scroll-snap-type: x mandatory;
@@ -1917,7 +1936,8 @@ body.mobile-menu-open .site-header-hero .brand-mark-hero {
   background: transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  margin-top: 0;
+  margin-top: -16px;
+  transform: translateY(-60px);
   justify-items: center;
 }
 
@@ -2569,13 +2589,23 @@ body.mobile-menu-open .site-header-hero .brand-mark-hero {
     padding-right: 0;
   }
 
-  .mission-copy-wrap,
   .catalog-copy,
   .about-copy,
   .mission-signoff,
   .collection-carousel-header {
     padding-left: 18px;
     padding-right: 18px;
+  }
+
+  .mission-copy-wrap,
+  .mission-copy {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .mission-signoff {
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .collection-showcase {
@@ -2624,16 +2654,72 @@ body.mobile-menu-open .site-header-hero .brand-mark-hero {
 
   .footer-links-embedded {
     grid-template-columns: 1fr;
-    gap: 22px;
+    gap: 8px;
     justify-items: start;
+    align-self: end;
+    margin: 0;
+    transform: none;
+    order: 2;
   }
 
   .footer-links-embedded .footer-group {
-    justify-items: start;
+    justify-items: center;
+    gap: 6px;
+    width: 100%;
+    text-align: center;
   }
 
   .footer-links-embedded .footer-group-contacts {
     justify-self: start;
+    gap: 6px;
+  }
+
+  .footer-group-contacts {
+    display: none;
+  }
+
+  .footer-links-embedded #footer-socials {
+    display: none;
+  }
+
+  .footer-group-nav > .footer-title:first-child,
+  .footer-group-nav > a[href="#mission"],
+  .footer-group-nav > a[href="#collection"],
+  .footer-group-nav > a[href="#about"],
+  .footer-group-nav > a[href="#catalog"] {
+    display: none;
+  }
+
+  .footer-title-secondary {
+    display: none;
+  }
+
+  .footer-links-embedded .footer-title,
+  .footer-links-embedded a,
+  .footer-links-embedded span,
+  .footer-contact-line,
+  .footer-address-line {
+    line-height: 1.18;
+  }
+
+  .legal-summary-line,
+  .legal-detail-label,
+  .legal-detail-value {
+    font-size: 0.9rem;
+    line-height: 1.08;
+  }
+
+  .legal-details {
+    gap: 2px;
+    padding: 0 16px;
+    margin-top: 0;
+    margin-bottom: 1.1em;
+    align-self: end;
+    order: 1;
+  }
+
+  .legal-detail-row {
+    line-height: 1.08;
   }
 
   .hero-copy-overlay {
@@ -2713,9 +2799,27 @@ body.mobile-menu-open .site-header-hero .brand-mark-hero {
     padding-bottom: 6px;
   }
 
+  .collection-carousel-viewport {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
   .collection-carousel-card {
     min-height: 74px;
     border-radius: 14px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 38%),
+      linear-gradient(145deg, rgba(255, 250, 242, 0.3), rgba(0, 0, 0, 0.03));
+    box-shadow: none;
+  }
+
+  .collection-carousel-card::before,
+  .collection-carousel-card::after {
+    display: block;
+  }
+
+  .collection-carousel-card img {
+    transform: scale(1.47) translateY(1%);
   }
 
   .meta-line {
@@ -2723,20 +2827,46 @@ body.mobile-menu-open .site-header-hero .brand-mark-hero {
   }
 
   .legal-hero {
-    min-height: 520px;
+    min-height: auto;
+    display: grid;
+    grid-template-rows: auto auto;
   }
 
   .legal-overlay {
-    padding: 46px 18px 34px;
+    position: static;
+    inset: auto;
+    grid-template-rows: auto auto;
+    align-content: start;
+    justify-items: stretch;
+    gap: 12px;
+    padding: 18px 18px 18px;
+    background: #221d1b;
   }
 
   .legal-detail-value {
     font-size: 0.94rem;
   }
 
+  .footer-links-embedded {
+    width: 100%;
+    align-self: end;
+    justify-items: start;
+    padding-top: 0;
+    margin-top: 0;
+  }
+
   .legal-details {
     grid-template-columns: 1fr;
-    padding: 14px 16px;
+    width: 100%;
+    padding: 0 16px;
+    margin-top: 0;
+    transform: none;
+    align-self: end;
+  }
+
+  .legal-hero > img {
+    height: auto;
+    min-height: 0;
   }
 
   .gallery-card {
@@ -2747,13 +2877,23 @@ body.mobile-menu-open .site-header-hero .brand-mark-hero {
     grid-template-columns: 1fr;
   }
 
+  .advantage-process-card {
+    gap: 6px;
+  }
+
   .advantage-process-card__node {
-    width: 110px;
-    height: 110px;
+    width: 55px;
+    height: 55px;
+  }
+
+  .advantage-process-card__node svg {
+    width: 18px;
+    height: 18px;
   }
 
   .advantage-process-card h3 {
-    font-size: 1.35rem;
+    font-size: 0.78rem;
+    line-height: 1.2;
   }
 
   .advantage-process-card p {

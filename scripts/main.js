@@ -49,6 +49,9 @@
     const footerAddress = document.getElementById("footer-address");
     const footerPhone = document.getElementById("footer-phone");
     const footerEmail = document.getElementById("footer-email");
+    const mobileMenuAddress = document.getElementById("mobile-menu-address");
+    const mobileMenuPhone = document.getElementById("mobile-menu-phone");
+    const mobileMenuEmail = document.getElementById("mobile-menu-email");
     const privacyLink = document.getElementById("privacy-link");
     const offerLink = document.getElementById("offer-link");
     const consentPolicyLink = document.getElementById("consent-policy-link");
@@ -66,14 +69,35 @@
         row.textContent = line.trim();
         footerAddress.appendChild(row);
       });
+
+      if (mobileMenuAddress) {
+        mobileMenuAddress.innerHTML = "";
+        [
+          "Воронежская обл., Семилукский р-н,",
+          "г. Семилуки, ул. Курская, д. 92Г, оф.1",
+        ].forEach((line) => {
+          const row = document.createElement("span");
+          row.className = "footer-address-line";
+          row.textContent = line;
+          mobileMenuAddress.appendChild(row);
+        });
+      }
     }
     if (footerPhone) {
       footerPhone.textContent = siteConfig.phone;
       footerPhone.href = siteConfig.phoneHref;
     }
+    if (mobileMenuPhone) {
+      mobileMenuPhone.textContent = siteConfig.phone;
+      mobileMenuPhone.href = siteConfig.phoneHref;
+    }
     if (footerEmail) {
       footerEmail.textContent = siteConfig.email;
       footerEmail.href = `mailto:${siteConfig.email}`;
+    }
+    if (mobileMenuEmail) {
+      mobileMenuEmail.textContent = siteConfig.email;
+      mobileMenuEmail.href = `mailto:${siteConfig.email}`;
     }
     if (privacyLink) {
       privacyLink.href = siteConfig.legal.privacy;
@@ -337,10 +361,6 @@
       !millingGallery.main || !millingGallery.caption || !millingGallery.rail || !millingGallery.prev || !millingGallery.next
     ) return;
 
-    const toneLine = card.code
-      ? `${card.place} (${card.code} ${card.title})`
-      : `${card.place} (${card.title})`;
-
     const moodLine = card.mood
       ? `<p><strong>Образ:</strong> ${card.mood}</p>`
       : `<p><strong>Образ:</strong> описание будет добавлено.</p>`;
@@ -352,7 +372,6 @@
       : `<p><strong>Цвет:</strong> описание будет добавлено.</p>`;
 
     copy.innerHTML = `
-      <p class="collection-modal-tone">${toneLine}</p>
       ${moodLine}
       ${associationsLine}
       ${colorLine}
@@ -568,19 +587,6 @@
     const card = collectionData.cards.find((item) => item.id === cardId);
     if (!card || !modal || !collectionModalContent || !requestForm) return;
 
-    const placeLabels = {
-      "Сардиния": "SARDINIA",
-      "Пьемонт": "PIEDMONT",
-      "Позитано": "POSITANO",
-      "Амальфи": "AMALFI",
-      "Лацио": "LAZIO",
-      "Умбрия": "UMBRIA",
-      "Ломбардия": "LOMBARDY",
-      "Сорренто": "SORRENTO",
-      "Сицилия": "SICILY",
-      "Венето": "VENETO",
-    };
-
     clearTimeout(modalCloseTimer);
     modal.hidden = false;
     modal.classList.add("is-collection");
@@ -588,7 +594,7 @@
     document.body.style.overflow = "hidden";
 
     document.getElementById("modal-kicker").textContent = "Коллекция";
-    document.getElementById("modal-title").textContent = `${card.title.toUpperCase()} - ${placeLabels[card.place] || card.place.toUpperCase()}`;
+    document.getElementById("modal-title").textContent = card.place;
     document.getElementById("modal-description").textContent = "";
 
     requestForm.hidden = true;
